@@ -76,6 +76,8 @@ in
       vim-nix
       nvim-treesitter-parsers.vimdoc
       neorg
+      vim-fugitive
+
 
       treesitterWithGrammars
     ];

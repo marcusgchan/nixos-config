@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
+  imports = [
       ./hardware-configuration.nix
       ../../modules/gc.nix
     ];
