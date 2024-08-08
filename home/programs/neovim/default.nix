@@ -67,6 +67,7 @@ in
       tokyonight-nvim
       comment-nvim
       luasnip
+      conform-nvim
       cmp-nvim-lsp
       luasnip
       friendly-snippets
@@ -102,6 +103,7 @@ in
       ${builtins.readFile ./nvim/plugins/treesitter.lua}
       ${builtins.readFile ./nvim/plugins/fugitive.lua}
       ${builtins.readFile ./nvim/plugins/colorscheme.lua}
+      ${builtins.readFile ./nvim/plugins/formatting.lua}
       ${builtins.readFile ./nvim/plugins/nvim-cmp.lua}
       ${builtins.readFile ./nvim/plugins/snips.lua}
       ${builtins.readFile ./nvim/plugins/neorg.lua}

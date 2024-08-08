@@ -7,20 +7,22 @@
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = ''
-      monitor=DP-1, 2560x1440@165, auto, auto
-      monitor=eDP-2, highrr, auto-left, auto
+      $MonitorInput = DP-6
+      #LaptopInput = eDP-1
+      monitor=DP-6, 2560x1440@165, auto, auto
+      monitor=eDP-1, highrr, auto-left, auto
       monitor=eDP-1, highres, auto, auto
 
-      workspace = 1, monitor:DP-1, default:true
-      workspace = 2, monitor:DP-1 
-      workspace = 3, monitor:DP-1 
-      workspace = 4, monitor:DP-1 
-      workspace = 5, monitor:DP-1 
-      workspace = 6, monitor:DP-1 
-      workspace = 7, monitor:DP-1 
-      workspace = 8, monitor:DP-1 
-      workspace = 9, monitor:eDP-2
-      workspace = 10, monitor:DP-1
+      workspace = 1, monitor:$MonitorInput, default:true
+      workspace = 2, monitor:$MonitorInput 
+      workspace = 3, monitor:$MonitorInput 
+      workspace = 4, monitor:$MonitorInput 
+      workspace = 5, monitor:$MonitorInput 
+      workspace = 6, monitor:$MonitorInput 
+      workspace = 7, monitor:$MonitorInput 
+      workspace = 8, monitor:$MonitorInput 
+      workspace = 9, monitor:$LaptopInput
+      workspace = 10, monitor:$MonitorInput
 
       $terminal = kitty
       $fileManager = dolphin
@@ -211,7 +213,7 @@
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = $mainMod, mouse:272, movewindow
-      bindm = $mainMod, mouse:273, resizewindow
+      bindm = $mainMod, mouse:273, resizewindowhypr
 
       exec-once=bash ~/.config/hypr/start.sh
       exec-once=hyprctl dispatch workspace 1
