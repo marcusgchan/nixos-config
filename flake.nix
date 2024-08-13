@@ -40,6 +40,14 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/m1-mac
+
+          home-manager.darwinModules.home-manager
+          {
+            nixpkgs.overlays = [ neorg-overlay.overlays.default ];
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.marcus = import ./home/darwin.nix;
+          }
         ];
       };
     };
