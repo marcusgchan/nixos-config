@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Wallpaper daemon
-swww-daemon &
+swww-daemon &&
 swww img ./wallpapers/house-in-mountains.webp
 
 brightnessctl s 20% &

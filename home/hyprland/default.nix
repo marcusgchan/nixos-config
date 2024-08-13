@@ -8,10 +8,10 @@
     enable = true;
     extraConfig = ''
       $MonitorInput = DP-6
-      #LaptopInput = eDP-1
+      $LaptopInput = eDP-1
       monitor=DP-6, 2560x1440@165, auto, auto
-      monitor=eDP-1, highrr, auto-left, auto
-      monitor=eDP-1, highres, auto, auto
+      monitor=$LaptopInput, highrr, auto-left, auto
+      monitor=$LaptopInput, highres, auto, auto
 
       workspace = 1, monitor:$MonitorInput, default:true
       workspace = 2, monitor:$MonitorInput 
@@ -21,7 +21,7 @@
       workspace = 6, monitor:$MonitorInput 
       workspace = 7, monitor:$MonitorInput 
       workspace = 8, monitor:$MonitorInput 
-      workspace = 9, monitor:$LaptopInput
+      workspace = 9, monitor:$LaptopInput, default:true
       workspace = 10, monitor:$MonitorInput
 
       $terminal = kitty
