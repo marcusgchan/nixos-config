@@ -36,9 +36,11 @@
 
     darwinConfigurations = {
       m1-mac = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/m1-mac
-        ]
+        ];
       };
     };
   };

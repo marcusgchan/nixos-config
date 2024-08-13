@@ -2,6 +2,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [ 
+    pkgs.git
     pkgs.vim
   ];
 
@@ -16,12 +17,14 @@
   programs.zsh.enable = true;  # default shell on catalina
 
   # Set Git commit hash for darwin-version.
-  system.configurationRevision = self.rev or self.dirtyRev or null;
+  # system.configurationRevision = self.rev or self.dirtyRev or null;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
+  security.pam.enableSudoTouchIdAuth = true;
+
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
-};
+}
