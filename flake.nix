@@ -1,5 +1,5 @@
 {
-  description = "A simple NixOS flake";
+  description = "A MBA-2 NixOS flake";
 
   inputs = {
     # NixOS official package source, using the nixos-23.11 branch here
@@ -9,9 +9,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
+
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, neorg-overlay, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, neorg-overlay, nix-darwin, ... }@inputs: {
     # Please replace my-nixos with your hostname
     nixosConfigurations = {
       lenovo = nixpkgs.lib.nixosSystem {
@@ -28,6 +31,14 @@
             home-manager.users.marcus = import ./home;
           }
         ];
+      };
+    };
+
+    darwinConfigurations = {
+      m1-mac = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./hosts/m1-mac
+        ]
       };
     };
   };
