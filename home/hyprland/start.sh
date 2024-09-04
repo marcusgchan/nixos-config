@@ -2,7 +2,7 @@
 
 # Wallpaper daemon
 swww-daemon &&
-swww img ./wallpapers/house-in-mountains.webp
+swww img ./wallpapers/house-in-mountains.webp &
 
 brightnessctl s 20% &
 

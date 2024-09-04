@@ -38,12 +38,16 @@
   # Configure keymap in X11
   services.xserver = {
     enable = true;
-    # dpi = 192;
+    dpi = 192;
     xkb = {
       layout = "us";
       variant = "";
     };
+    displayManager.sessionCommands = ''
+      xrdb -merge <<< "Xft.dpi: 192"
+    '';
     displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
@@ -54,7 +58,7 @@
       ];
     };
   };
-  # services.displayManager.defaultSession = "none+i3";
+  # services.displayManager.defaultSession = "gnome";
   services.displayManager.defaultSession = "hyprland";
 
   # Wayland
@@ -69,9 +73,10 @@
     NIXOS_OZONE_WL = "1";
   };
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-  environment.pathsToLink = [ "/share/zsh" ];
+  # libexec for i3block
+  environment.pathsToLink = [ "/share/zsh" "libexec" ];
   programs.zsh.enable = true;
   users.users.marcus.shell = pkgs.zsh;
 
@@ -108,6 +113,25 @@
     libnotify
     swww # walpaper daemon
     fuzzel
+    (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
+      pkgs.buildFHSUserEnv (base // {
+      name = "fhs";
+      targetPkgs = pkgs: (
+        # pkgs.buildFHSUserEnv provides only a minimal FHS environment,
+        # lacking many basic packages needed by most software.
+        # Therefore, we need to add them manually.
+        #
+        # pkgs.appimageTools provides basic packages required by most software.
+        base.targetPkgs pkgs ++ [
+          pkg-config
+          ncurses
+          # Feel free to add more packages here if needed.
+        ]
+      );
+      profile = "export FHS=1";
+      runScript = "bash";
+      extraOutputsToInstall = ["dev"];
+    }))
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -181,6 +205,8 @@
 
   # Sound
   security.rtkit.enable = true;
+
+  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -193,6 +219,7 @@
   hardware.enableAllFirmware = true;
 
   # Power profile
+  services.power-profiles-daemon.enable = false;
   powerManagement.enable = true;
   services.tlp = {
     enable = true;

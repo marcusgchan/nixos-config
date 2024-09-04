@@ -1,7 +1,7 @@
 { pkgs, lib, ... }: 
 let
   # Define your variables here
-  modKey = "Mod1";  # Modifier key
+  modKey = "Mod4";  # Modifier key
 
   workspace1 = "1";
   workspace2 = "2";
@@ -28,18 +28,18 @@ in
       modifier = modKey;  # Use the modifier variable
 
       # Assign workspaces to specific outputs
-      workspaceOutputAssign = {
-        "${workspace1}".output = "${mainDisplay}";
-        "${workspace2}".output = "${mainDisplay}";
-        "${workspace3}".output = "${mainDisplay}";
-        "${workspace4}".output = "${mainDisplay}";
-        "${workspace5}".output = "${mainDisplay}";
-        "${workspace6}".output = "${mainDisplay}";
-        "${workspace7}".output = "${mainDisplay}";
-        "${workspace8}".output = "${mainDisplay}";
-        "${workspace9}".output = "${secondaryDisplay}";
-        "${workspace10}".output = "${mainDisplay}";
-      };
+        workspaceOutputAssign = [
+        { workspace = workspace1; output = mainDisplay; }
+        { workspace = workspace2; output = mainDisplay; }
+        { workspace = workspace3; output = mainDisplay; }
+        { workspace = workspace4; output = mainDisplay; }
+        { workspace = workspace5; output = mainDisplay; }
+        { workspace = workspace6; output = mainDisplay; }
+        { workspace = workspace7; output = mainDisplay; }
+        { workspace = workspace8; output = mainDisplay; }
+        { workspace = workspace9; output = secondaryDisplay; }
+        { workspace = workspace10; output = mainDisplay; }
+      ];
 
       # Keybindings
       keybindings = lib.mkOptionDefault {
@@ -90,38 +90,39 @@ in
       bars = [
         {
           position = "top";
-          extraConfig = """
-            separator_block_width=15
-
-            [volume]
-            label=VOL
-            label=♪
-            instance=Master
-            interval=1
-            signal=10
-
-            [memory]
-            label=MEM
-            interval=30
-
-            [wifi]
-            #instance=wlp3s0
-            interval=10
-            separator=false
-
-            [battery]
-            label=BAT
-            label=⚡
-            instance=1
-            interval=30
-
-            [time]
-            command=date '+%Y-%m-%d %H:%M:%S'
-            interval=1
-          """;
+          # extraConfig = ''
+          #   separator_block_width=15
+          #
+          #   [volume]
+          #   # label=VOL
+          #   label=♪
+          #   instance=Master
+          #   interval=1
+          #   signal=10
+          #
+          #   [memory]
+          #   label=MEM
+          #   interval=30
+          #
+          #   [wifi]
+          #   #instance=wlp3s0
+          #   interval=10
+          #   separator=false
+          #
+          #   [battery]
+          #   # label=BAT
+          #   label=⚡
+          #   instance=1
+          #   interval=30
+          #
+          #   [time]
+          #   command=date '+%Y-%m-%d %H:%M:%S'
+          #   interval=1
+          # '';
         }
       ];
     };
   };
+
 }
 

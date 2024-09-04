@@ -18,7 +18,6 @@
     pointerCursor = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
-      # size = 52;
     };
 
     # This value determines the Home Manager release that your
